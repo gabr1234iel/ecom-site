@@ -1,7 +1,7 @@
 import { Icons } from "@/components/Icons";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Phone from "@/components/Phone";
-import Reviews from "@/components/Reviews";
+import { Reviews } from "@/components/Reviews";
 import { Check, Star } from "lucide-react";
 
 export default function Home() {
@@ -120,6 +120,7 @@ export default function Home() {
           </div>
 
           <div className='mx-auto grid max-w-2xl grid-cols-1 px-4 lg:mx-0 lg:max-w-none lg:grid-cols-2 gap-y-16'>
+            {/* first user review */}
             <div className='flex flex-auto flex-col gap-4 lg:pr-8 xl:pr-20'>
               <div className='flex gap-0.5 mb-2'>
                 <Star className='h-5 w-5 text-green-600 fill-green-600' />
