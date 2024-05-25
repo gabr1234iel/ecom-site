@@ -42,8 +42,8 @@ export const MODELS = {
             value: "iphone14",
         },
         {
-            label: "iPhone 16", 
-            value: "iphone16",
+            label: "iPhone 15", 
+            value: "iphone15",
         },
     ],
 } as const
