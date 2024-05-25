@@ -20,4 +20,4 @@ const DesignConfigurator = ({
   )
 }
 
-export default DesignConfigurator
+export default DesignConfigurator 
