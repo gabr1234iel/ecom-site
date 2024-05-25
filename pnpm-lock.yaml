@@ -57,7 +57,7 @@ importers:
         specifier: ^14.2.3
         version: 14.2.3(react@18.3.1)
       sharp:
-        specifier: 0.32.6
+        specifier: ^0.32.6
         version: 0.32.6
       tailwind-merge:
         specifier: ^2.3.0

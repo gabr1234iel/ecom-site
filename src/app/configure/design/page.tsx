@@ -1,3 +1,7 @@
+import { db } from "@/db";
+import { notFound } from "next/navigation";
+import DesignConfigurator from "./DesignConfigurator";
+
 interface PageProps {
     searchParams: {
         [key: string]: string | string[] | undefined;
@@ -7,8 +11,20 @@ interface PageProps {
 const Page = async ({ searchParams }:PageProps) =>{
     
     const { id } = searchParams;
-    //make db call
-    return (<>{id}</>)
+    
+    if(!id || typeof id !== 'string') return notFound();
+    
+    const confiuration = await db.configuration.findUnique({
+        where: { id }
+    })
+
+    if(!confiuration) {
+        return notFound();
+    }
+
+    const { imageUrl, width, height } = confiuration;
+
+    return <DesignConfigurator />
 
 
 }
