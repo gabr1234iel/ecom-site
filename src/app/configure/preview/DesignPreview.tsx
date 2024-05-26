@@ -26,8 +26,7 @@ const DesignPreview = ({configuration}:{configuration: Configuration}) => {
       )!
 
     let totalPrice = BASE_PRICE
-    if (material === 'polycarbonate')
-        totalPrice += PRODUCT_PRICES.material.polycarbonate
+    if (material === 'polycarbonate') totalPrice += PRODUCT_PRICES.material.polycarbonate
     if (finish === 'textured') totalPrice += PRODUCT_PRICES.finish.textured
     
 
@@ -125,6 +124,7 @@ const DesignPreview = ({configuration}:{configuration: Configuration}) => {
                             Check out <ArrowRight className='h-4 w-4 ml-1.5 inline' />
                         </Button>
                     </div>
+                    
                 </div>
             </div>
         </div>
