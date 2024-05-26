@@ -7,13 +7,19 @@ import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
 import { cn, formatPrice } from '@/lib/utils'
 import { COLORS, MODELS } from '@/validators/option.validator'
 import { Configuration } from '@prisma/client'
+import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, Check } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-dom-confetti'
+import { createCheckoutSession } from './actions'
+import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/ui/use-toast'
 
 
 const DesignPreview = ({configuration}:{configuration: Configuration}) => {
 
+    const router = useRouter();
+    const { toast } = useToast()
     const [showConfetti, setShowConfetti] = useState<boolean>(false)
     useEffect(() => setShowConfetti(true))
 
@@ -29,6 +35,23 @@ const DesignPreview = ({configuration}:{configuration: Configuration}) => {
     if (material === 'polycarbonate') totalPrice += PRODUCT_PRICES.material.polycarbonate
     if (finish === 'textured') totalPrice += PRODUCT_PRICES.finish.textured
     
+    const { mutate: createPaymentSession } = useMutation({
+        mutationKey: ['get-checkout-session'],
+        mutationFn: createCheckoutSession,
+        onSuccess: ({ url }) => {
+            if(url) router.push
+            else throw new Error('Unable to retrieve payment URL')
+        },
+        onError: (error) => {
+            toast({
+                title: 'Something went wrong',
+                description: 'There was an error on our end. Please try again.',
+                variant: 'destructive',
+            
+            })
+        }
+
+    })
 
     return (
     <>
@@ -119,7 +142,7 @@ const DesignPreview = ({configuration}:{configuration: Configuration}) => {
 
                     <div className='mt-8 flex justify-end pb-12'>
                         <Button
-                            // onClick={() => handleCheckout()}
+                            onClick={() => createPaymentSession({configId: configuration.id})}
                             className='px-4 sm:px-6 lg:px-8'>
                             Check out <ArrowRight className='h-4 w-4 ml-1.5 inline' />
                         </Button>
