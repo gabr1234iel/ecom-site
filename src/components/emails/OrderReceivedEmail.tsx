@@ -10,11 +10,12 @@ const OrderReceivedEmail = ({
     orderId: string,
     orderDate: string,
 }) => {
+    const baseUrl = 
+      process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:3000' 
+      : 'https://casecobra-next.vercel.app'
 
-
-    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://casecobra-next.vercel.app'
-
-    return 
+    return (
     <Html>
         <Head/>
         <Preview>Your order summary and estimated delivery date</Preview>
@@ -80,6 +81,7 @@ const OrderReceivedEmail = ({
             </Container>
         </Body>
     </Html>
+    )
 }
 
 
